@@ -279,6 +279,9 @@ CMD ["bash"]
 ############ build #############################################################
 FROM dev AS build
 
+# Copy colcon defaults
+COPY colcon_defaults.yaml $WORKSPACE
+
 ARG CMAKE_ARGS="-DCMAKE_BUILD_TYPE=Release"
 # build ROS workspace
 RUN if [[ -x "$(command -v colcon)" ]]; then \
