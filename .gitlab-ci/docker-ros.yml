@@ -122,7 +122,7 @@ default:
   script:
     - |-
       if [[ ${CI_RUNNER_EXECUTABLE_ARCH} != ${_PLATFORM} && ${CI_RUNNER_EXECUTABLE_ARCH} != linux/${_PLATFORM} ]]; then
-        docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+        docker run --privileged --rm tonistiigi/binfmt --install all
       fi
       TARGET=${_TARGET} PLATFORM=${_PLATFORM} ./docker/docker-ros/scripts/ci.sh
       echo -e "section_start:`date +%s`:push_section[collapsed=true]\r\e[0K[docker-ros] Push ${IMAGE}"
